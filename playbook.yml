@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: install collectd
+      yum:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - collectd
+
