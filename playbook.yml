@@ -1,7 +1,21 @@
 ---
 - hosts: all
   become: true
-  roles:
-    - stress-ng
+  tasks:
+    - name: install epel-release
+      package:
+        name: epel-release
+        state: present
+    
+    - name: install screen
+      package:
+        name: screen
+        state: present
+      
+    - name: install stress-ng
+      package:
+        name: stress-ng
+        state: present
+
  
 

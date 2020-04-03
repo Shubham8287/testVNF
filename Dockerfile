@@ -1,7 +1,8 @@
-FROM ubuntu:18.04
+FROM centos:latest
 
-RUN apt-get update && apt-get install software-properties-common --yes
+RUN yum update -y && yum install -y epel-release
 
-RUN apt-get install -y ssh && apt-get install -y ansible
+RUN  yum install -y snapd && systemctl enable snapd 
+RUN systemctl enable --now snapd.socket && snap install packer-io
 
 CMD []

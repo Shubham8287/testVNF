@@ -1,0 +1,15 @@
+#!/bin/bash -eux
+
+
+# ssh key
+mkdir /home/vagrant/.ssh
+cat <<EOF >> /home/vagrant/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJgaypoMl9sLU3ihh04sxnLQXKAYvWbbY8hF1i6rKWTHEVBLV40pAQTivKhASBej1zmENfOqXerk6duXL/jZGRsSoZeyW2HLbHDffKS2Kna4QTDkbiapNd9eR1ppxBgumAcOvEpRecFY2J1V4uJlbaMalg4ec2AEcUTVH5xgdqLry74tRPeEGiLtgd/KvZR9cJSXB0UbbE7Bjd/rpIbYq75XZzrOTaMAiSmAbjodx9z1Yy0vgeQnSuQRgeVpI4EL8GtLztAzAGLkfRcx5aAn1z3206phVrHTKFQAWBUcOl7Q15XtiR7DlznAKYYimBu3PAJMbL8PupczxKI+GRQSUipYKz6LvBaS2vrxFE/8OuwfXVrHr/S3dB+qdIJJM3JJhl6tEeF8YgS7yApw0KZenPcoRjvDolb6apg6j46O/P3UC9A6EgzJikR10ktchKp6ssrRAWpmZuKtKRXDyqgR0q5Y9czHZ8nL1DfU0tqrdriDy85fL9l1v9tOnQDNDvukk= shubham@sheero
+EOF
+
+
+# Install EPEL repository.
+yum -y install EPEL
+
+# Install Ansible.
+yum -y install ansible
