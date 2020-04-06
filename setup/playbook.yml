@@ -17,5 +17,10 @@
         name: stress-ng
         state: present
 
+    - name: install collectd
+      package:
+        name: collectd
+        state: present
+
  
 
