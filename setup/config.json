@@ -3,5 +3,8 @@
     "client_secret": "d8d75f90-4b9c-4c08-9ac9-4544b5dfb404",
     "subscription_id": "51276d4a-05ea-4765-9f04-70b0957c6643",
     "object_id": "51276d4a-05ea-4765-9f04-70b0957c6643",
-    "tenant_id": "12b618d3-3774-4c25-9a2d-9ebb8d71ef90"
+    "tenant_id": "12b618d3-3774-4c25-9a2d-9ebb8d71ef90",
+
+    "username": "testuser",
+    "password":"testpass"
 }

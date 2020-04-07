@@ -8,7 +8,7 @@
     "tenant_id": "{{user `tenant_id`}}",
 
     "managed_image_resource_group_name": "myResourceGroup",
-    "managed_image_name": "MyCentOSImage",
+    "managed_image_name": "testVNFImage",
 
     "ssh_username": "{{user `ssh_user`}}",
     "ssh_password": "{{user `ssh_pass`}}",
@@ -31,14 +31,17 @@
     },
     {
       "type": "ansible-local",
-      "playbook_file": "playbook.yml",
-      "extra_arguments": ["--extra-vars","ansible_become_pass=vagrant"]
+      "playbook_file": "playbook.yml"
+    },
+    {
+      "type": "file",
+      "source": "/.ssh/id_rsa.pub",
+      "destination": "/home/{{ username }}/.ssh/authorized_keys"      
     },
     {
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/cleanup.sh"
     }
-  ],
-  "post-processors": ["vagrant"]
+  ]
 }
