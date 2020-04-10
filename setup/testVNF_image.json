@@ -1,5 +1,6 @@
 { 
   "builders": [{
+    "name": "azure",
     "type": "azure-arm",
 
     "client_id": "{{user `client_id`}}",
@@ -22,26 +23,85 @@
 
     "location": "South Central US",
     "vm_size": "Standard_DS2_v2"
-  }],
+  },
+      { "name": "vagrant",
+        "type": "virtualbox-iso",
+        "boot_command": [
+          "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+        ],
+        "boot_wait": "20s",
+        "disk_size": 11920,
+        "guest_os_type": "RedHat_64",
+        "headless": false,
+        "http_directory": "http",
+        "iso_urls": [
+          "CentOS-7-x86_64-Minimal-1908.iso",
+          "http://mirrors.mit.edu/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1908.iso"
+        ],
+        "iso_checksum_type": "sha256",
+        "iso_checksum": "9a2c47d97b9975452f7d582264e9fc16d108ed8252ac6816239a3b58cef5c53d",
+        "ssh_username": "testy",
+        "ssh_password": "testpass",
+        "ssh_port": 22,
+        "ssh_wait_timeout": "10000s",
+        "shutdown_command": "echo 'testpass'|sudo -S /sbin/halt -h -p",
+        "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+        "virtualbox_version_file": ".vbox_version",
+        "vm_name": "packer-centos-7-x86_64",
+        "vboxmanage": [
+          [
+            "modifyvm",
+            "{{.Name}}",
+            "--memory",
+            "512"
+          ],
+          [
+            "modifyvm",
+            "{{.Name}}",
+            "--cpus",
+            "1"
+          ]
+        ]
+      }
+],
   "provisioners": [
     {
       "type": "shell",
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "execute_command": "echo testpass | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/ansible.sh"
+    },
+    {
+      "type": "file",
+      "source": "{{user `ssh_path`}}",
+      "destination": "/home/{{user `ssh_user`}}/.ssh/authorized_keys",
+      "only":["azure"]
+    },
+    {
+      "type": "file",
+      "source": "/home/shubham/.ssh/id_rsa.pub",
+      "destination": "/home/{{user `ssh_user`}}/.ssh/authorized_keys",
+      "only":["vagrant"]
     },
     {
       "type": "ansible-local",
       "playbook_file": "playbook.yml"
     },
     {
-      "type": "file",
-      "source": "/.ssh/id_rsa.pub",
-      "destination": "/home/{{ username }}/.ssh/authorized_keys"      
+      "type": "shell",
+      "execute_command": "echo testpass | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
     },
     {
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+      "inline": [
+        "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+      ],
+      "inline_shebang": "/bin/sh -x",
       "type": "shell",
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/cleanup.sh"
+      "only": ["azure"],
+      "skip_clean": "true"
     }
-  ]
+  ],
+  "post-processors": ["vagrant"]
+
 }

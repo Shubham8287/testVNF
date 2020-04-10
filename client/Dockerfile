@@ -8,3 +8,6 @@ mv packer /usr/local/bin/.
 
 RUN yum -y install openssh-clients
 RUN  mkdir /.ssh && ssh-keygen -q -t rsa -N '' -f /.ssh/id_rsa
+
+
+RUN yum -y install python3 python3-devel && pip3 install ansible

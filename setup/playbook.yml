@@ -1,31 +1,10 @@
 ---
 - hosts: all
   vars:
-    username: "test"
-    password: "test"
+    username: "testy"
+    password: "testpass"
   become: true
   tasks:
-   - name: "Add a new user named {{ username }}"
-     user:
-      name: "{{ username }}"
-      password: "{{ password }}"
-
-   - name: "Add user {{ username }} to the sudoers"
-     copy:
-      dest: "/etc/sudoers.d/{{ username }}"
-      content: "{{ username }}   ALL=(ALL)  NOPASSWD: ALL"
-
- #  - name: Deploy SSH Key
-  #   authorized_key: user={{ username }}
-   #                  key="{{ lookup('file', '/.ssh/id_rsa.pub') }}"
-
-   - name: Disable Password Authentication
-     lineinfile:
-          dest=/etc/ssh/sshd_config
-          regexp='^PasswordAuthentication'
-          line="PasswordAuthentication no"
-          state=present
-          backup=yes
 
    - name: install epel-release
      package:

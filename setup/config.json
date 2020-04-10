@@ -5,6 +5,8 @@
     "object_id": "51276d4a-05ea-4765-9f04-70b0957c6643",
     "tenant_id": "12b618d3-3774-4c25-9a2d-9ebb8d71ef90",
 
-    "username": "testuser",
-    "password":"testpass"
+    "ssh_user": "testy",
+    "ssh_pass":"testpass",
+    "ssh_path": "/.ssh/id_rsa.pub"
+
 }
