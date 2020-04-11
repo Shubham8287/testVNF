@@ -5,5 +5,3 @@ yum -y install EPEL
 
 # Install Ansible.
 yum -y install ansible
-
-mkdir .ssh

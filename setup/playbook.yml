@@ -1,10 +1,25 @@
 ---
 - hosts: all
   vars:
-    username: "testy"
-    password: "testpass"
+    username: "testuser"
+    password: "test"
   become: true
   tasks:
+  
+   - name: create a new user
+     user: 
+        name: "{{ username }}"
+        state:  present
+        groups: "wheel"
+        password: "{{ password }}"
+        comment: "user for ansible connection"
+  
+   - lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
 
    - name: install epel-release
      package:

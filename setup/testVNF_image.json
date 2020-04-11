@@ -32,7 +32,7 @@
         "boot_wait": "20s",
         "disk_size": 11920,
         "guest_os_type": "RedHat_64",
-        "headless": false,
+        "headless": true,
         "http_directory": "http",
         "iso_urls": [
           "CentOS-7-x86_64-Minimal-1908.iso",
@@ -73,13 +73,13 @@
     {
       "type": "file",
       "source": "{{user `ssh_path`}}",
-      "destination": "/home/{{user `ssh_user`}}/.ssh/authorized_keys",
+      "destination": "/home/{{user `ssh_user`}}/temp",
       "only":["azure"]
     },
     {
       "type": "file",
       "source": "/home/shubham/.ssh/id_rsa.pub",
-      "destination": "/home/{{user `ssh_user`}}/.ssh/authorized_keys",
+      "destination": "/home/{{user `ssh_user`}}/temp",
       "only":["vagrant"]
     },
     {
