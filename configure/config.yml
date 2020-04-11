@@ -1,0 +1,11 @@
+---
+
+stressng:
+    test_duration: "100"  # Test duration in seconds (defaults to 86400 which is 24h)
+    cpu_workers: "1"
+    vm_workers: "0"
+    hdd_workers: "0"
+    bytes_per_hdd_worker: "6M"
+    bytes_per_vm_worker: "6M"
+    stress_tmp_dir: /home/testuser/stress-tmp
+    skip_screen_check: false

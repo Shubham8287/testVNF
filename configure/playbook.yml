@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  remote_user: testuser
+  vars_files:
+    - /home/shubham/Desktop/P4/configure/config.yml
+
+  roles:
+
+  - stress-ng
