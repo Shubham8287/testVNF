@@ -22,7 +22,7 @@
     chdir: "{{ stressng.stress_tmp_dir }}"
   tags: skip_ansible_lint
 
-- name: Get s process count
+- name: Get stress-ng process count
   shell: ps -ef|grep "[s]tress-ng"|wc -l
   register: stress_procs
   changed_when: False

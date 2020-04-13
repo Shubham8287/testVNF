@@ -7,4 +7,8 @@
 
   roles:
 
-  - stress-ng
+  - { role: stress-ng,
+      tags: stress-ng }
+      
+  - { role: collectd, 
+      tags: collectd }

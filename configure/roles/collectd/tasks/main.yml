@@ -1,0 +1,9 @@
+---
+
+  - name: Configure Collectd
+    template: 
+          src: collectd.conf.j2 
+          dest: collectd.conf
+    changed_when: true
+    notify:
+      - Restart Collectd
