@@ -1,7 +1,7 @@
 #!/bin/bash -eux
-
+yum -y update
 # Install EPEL repository.
-yum -y install EPEL
+yum -y install epel-release
 
 # Install Ansible.
 yum -y install ansible

@@ -1,7 +1,7 @@
 ---
 
 stressng:
-    test_duration: "100"  # Test duration in seconds (defaults to 86400 which is 24h)
+    test_duration: "400"  # Test duration in seconds (defaults to 86400 which is 24h)
     cpu_workers: "1"
     vm_workers: "0"
     hdd_workers: "0"

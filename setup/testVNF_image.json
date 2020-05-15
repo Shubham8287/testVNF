@@ -1,29 +1,5 @@
 { 
-  "builders": [{
-    "name": "azure",
-    "type": "azure-arm",
-
-    "client_id": "{{user `client_id`}}",
-    "client_secret": "{{user `client_secret`}}",
-    "subscription_id": "{{user `subscription_id`}}",
-    "tenant_id": "{{user `tenant_id`}}",
-
-    "managed_image_resource_group_name": "myResourceGroup",
-    "managed_image_name": "testVNFImage",
-
-    "ssh_username": "{{user `ssh_user`}}",
-    "ssh_password": "{{user `ssh_pass`}}",
-
-    "os_type": "Linux",
-    "image_publisher": "OpenLogic",
-    "image_offer": "CentOS",
-    "image_sku": "7.3",
-    "image_version": "latest",
-    "ssh_pty": "true",
-
-    "location": "South Central US",
-    "vm_size": "Standard_DS2_v2"
-  },
+  "builders": [
       { "name": "vagrant",
         "type": "virtualbox-iso",
         "boot_command": [
@@ -62,24 +38,34 @@
             "1"
           ]
         ]
-      }
+      },
+      {
+        "name": "openstack",
+        "type": "openstack",
+          "image_name": "testvnf_image",
+          "identity_endpoint": "http://91.106.194.43:5000/v3",
+          "username": "vipin",
+          "password": "vipin@vnf",
+          "ssh_username": "centos",
+          "networks" : "438914ab-8c41-4c7e-8a8d-4f8cd521ef6e",
+          "source_image": "0ebcaa52-2da4-4a38-95eb-1c06f9759761",
+          "flavor": "2420b5c6-7d8f-49d4-9ba4-cf8d2e2e310b",
+          "domain_name": "Default",
+          "ssh_timeout": "15m",
+          "use_floating_ip": "true",
+          "floating_ip_network" : "b8d94cc1-84f6-4e4e-b26f-affd1434535f"
+   } 
 ],
   "provisioners": [
     {
       "type": "shell",
-      "execute_command": "echo testpass | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "execute_command": "echo testvnf | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/ansible.sh"
     },
     {
       "type": "file",
-      "source": "{{user `ssh_path`}}",
-      "destination": "/home/{{user `ssh_user`}}/temp",
-      "only":["azure"]
-    },
-    {
-      "type": "file",
       "source": "/home/shubham/.ssh/id_rsa.pub",
-      "destination": "/home/{{user `ssh_user`}}/temp",
+      "destination": "/home/testvnf/temp",
       "only":["vagrant"]
     },
     {
@@ -87,21 +73,14 @@
       "playbook_file": "playbook.yml"
     },
     {
-      "type": "shell",
-      "execute_command": "echo testpass | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/cleanup.sh"
+      "type": "file",
+      "source": "{{user `ssh_path`}}",
+      "destination": "temp"
     },
     {
-      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
-      "inline": [
-        "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
-      ],
-      "inline_shebang": "/bin/sh -x",
       "type": "shell",
-      "only": ["azure"],
-      "skip_clean": "true"
+      "execute_command": "echo testvnf | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
     }
-  ],
-  "post-processors": ["vagrant"]
-
+  ]
 }

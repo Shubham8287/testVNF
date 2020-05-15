@@ -1,8 +1,8 @@
 ---
 - hosts: all
   vars:
-    username: "testuser"
-    password: "test"
+    username: "testvnf"
+    password: "testvnf"
   become: true
   tasks:
   
@@ -11,7 +11,7 @@
         name: "{{ username }}"
         state:  present
         groups: "wheel"
-        password: "{{ password }}"
+        password: "{{ password | password_hash('sha512') }}"
         comment: "user for ansible connection"
   
    - lineinfile:
@@ -20,6 +20,12 @@
         regexp: '^%wheel'
         line: '%wheel ALL=(ALL) NOPASSWD: ALL'
         validate: 'visudo -cf %s'
+    
+   - name: Ansible create file if it doesn't exist example
+     file:
+        path: "temp"
+        state: touch
+    
 
    - name: install epel-release
      package:
@@ -40,6 +46,3 @@
      package:
         name: collectd
         state: present
-
- 
-
