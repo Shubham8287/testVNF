@@ -1,12 +1,11 @@
 {
-    "client_id": "b3251df1-75d5-4496-893a-0a8cc7843891",
-    "client_secret": "d8d75f90-4b9c-4c08-9ac9-4544b5dfb404",
-    "subscription_id": "51276d4a-05ea-4765-9f04-70b0957c6643",
-    "object_id": "51276d4a-05ea-4765-9f04-70b0957c6643",
-    "tenant_id": "12b618d3-3774-4c25-9a2d-9ebb8d71ef90",
-
-    "ssh_user": "testy",
-    "ssh_pass":"testpass",
-    "ssh_path": "/.ssh/id_rsa.pub"
-
+    "username": "vipin",
+    "password": "vipin@vnf",
+    "networks" : "438914ab-8c41-4c7e-8a8d-4f8cd521ef6e",
+    "source_image": "0ebcaa52-2da4-4a38-95eb-1c06f9759761",
+    "flavor": "2420b5c6-7d8f-49d4-9ba4-cf8d2e2e310b",
+    "domain_name": "Default",
+    "use_floating_ip": "true",
+    "floating_ip_network" : "b8d94cc1-84f6-4e4e-b26f-affd1434535f",
+    "ssh_path": "/home/shubham/.ssh/id_rsa.pub"
 }
