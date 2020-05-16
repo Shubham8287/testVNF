@@ -2,7 +2,7 @@
 
 There are two ways to build image :-
 * using Openstack builder- you need to provide openstack credentials, packer will build image on openstack and save it in glance.
-* using qemu builder- packer will create image locally, then user can upload it to glcance to create VM.
+* using qemu builder- packer will create image locally, then user can upload it to glance to create VM.
 
 ## Instructions to create image
 1. Clone the repo
