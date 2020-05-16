@@ -1,11 +1,10 @@
 {
-    "username": "vipin",
-    "password": "vipin@vnf",
+    "username": "",
+    "password": "",
     "networks" : "438914ab-8c41-4c7e-8a8d-4f8cd521ef6e",
     "source_image": "0ebcaa52-2da4-4a38-95eb-1c06f9759761",
     "flavor": "2420b5c6-7d8f-49d4-9ba4-cf8d2e2e310b",
     "domain_name": "Default",
-    "use_floating_ip": "true",
     "floating_ip_network" : "b8d94cc1-84f6-4e4e-b26f-affd1434535f",
 
     "ssh_path": "/home/shubham/.ssh/id_rsa.pub"
