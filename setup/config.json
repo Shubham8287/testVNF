@@ -7,5 +7,6 @@
     "domain_name": "Default",
     "use_floating_ip": "true",
     "floating_ip_network" : "b8d94cc1-84f6-4e4e-b26f-affd1434535f",
+
     "ssh_path": "/home/shubham/.ssh/id_rsa.pub"
 }
