@@ -9,13 +9,9 @@
     screen -S stress -d -m
     stress-ng
     --timeout {{ stressng.test_duration }}
-    --hdd-bytes {{ stressng.bytes_per_hdd_worker }}
-    --vm-bytes {{ stressng.bytes_per_vm_worker }}
-    --vm-method all
-    --cpu-method all
+    --cpu-method {{ stressng.methods }}
     --cpu {{ stressng.cpu_workers }}
-    --vm {{ stressng.vm_workers }}
-    --hdd {{ stressng.hdd_workers }}
+    --metrics-brief
     --log-file {{ stressng.stress_tmp_dir }}/stress-ng-{{ ansible_date_time.iso8601_basic_short }}.log
     ;
   args:

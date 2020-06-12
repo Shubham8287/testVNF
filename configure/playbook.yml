@@ -1,9 +1,10 @@
 ---
 
 - hosts: all
-  remote_user: testuser
+  remote_user: testvnf
   vars_files:
     - /home/shubham/Desktop/P4/configure/config.yml
+  become: yes
 
   roles:
 
