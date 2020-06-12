@@ -8,7 +8,7 @@ There are two ways to build image :-
 1. Clone the repo
 2. cd testVNF/setup
 3. If creating image using qemu builder
-    - Open config.json and change "ssh_path key" (you can ignore rest of the keys)
+    - Open config.json and change "ssh_path" key (you can ignore rest of the keys)
     - Run    ``` packer build --var-file=config.json --only=qemu testVNF_image.json ``` (this step will take around 30 min)
     - Upload the image to Glance manually.
     
