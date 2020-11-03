@@ -13,8 +13,8 @@
       "iso_checksum": "101bc813d2af9ccf534d112cbe8670e6d900425b297d1a4d2529c5ad5f226372",
       "iso_checksum_type": "sha256",
       "iso_url": "http://centos.osuosl.org/7.8.2003/isos/x86_64/CentOS-7-x86_64-NetInstall-2003.iso",
-      "output_directory": "testVNF",
-      "qemuargs": [ [ "-m", "1024M" ],["-display","gtk"] ],
+      "output_directory": "image",
+      "qemuargs": [ [ "-m", "1024M" ]],
       "shutdown_command": "echo 'centos'|sudo -S /sbin/halt -h -p",
       "ssh_password": "centos",
       "ssh_port": 22,
@@ -22,7 +22,8 @@
       "ssh_wait_timeout": "10000s",
       "type": "qemu",
       "vm_name": "packer-centos-7-x86_64-openstack",
-      "vnc_bind_address": "0.0.0.0"
+      "vnc_bind_address": "0.0.0.0",
+      "Headless": "true"
     },
     {
       "name": "openstack",
@@ -48,6 +49,11 @@
       "script": "scripts/ansible.sh"
     },
     {
+      "type": "file",
+      "source": "scripts/deploycentostools.sh",
+      "destination": "deploycentostools.sh"
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "playbook.yml"
     },
@@ -63,3 +69,4 @@
     }
   ]
 }
+

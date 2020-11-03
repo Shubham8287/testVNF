@@ -31,18 +31,6 @@
      package:
         name: epel-release
         state: present
-    
-   - name: install screen
-     package:
-        name: screen
-        state: present
-      
-   - name: install stress-ng
-     package:
-        name: stress-ng
-        state: present
-
-   - name: install collectd
-     package:
-        name: collectd
-        state: present
+  
+   - name: Execute the deployment script
+     command: /home/centos/deploycentostools.sh deploy
